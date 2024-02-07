@@ -6,68 +6,51 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    Rigidbody2D rb2d;
+    public Animator anim;
 
-  Animator anim;
-    
-  private Rigidbody2D rd2d;
-   
-  public float speed;
+    [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float jumpSpeed = 3f;
 
-  public int maxHealth = 10;
-  public int currentHealth;
+    float keyHorizontal;
+    bool keyJump;
+    public GameObject projectilePrefab;
 
-  AudioSource audioSource;
-  public AudioClip backgroundMusicClip;
-  public AudioClip damageSoundClip;
+    public int maxHealth = 10;
+    public int currentHealth;
 
+    AudioSource audioSource;
+    public AudioClip backgroundMusicClip;
+    public AudioClip damageSoundClip;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        rd2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
 
-        audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource component dynamically
-        audioSource.clip = backgroundMusicClip; // Assign background music clip
-        audioSource.loop = true; // Set background music to loop
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = backgroundMusicClip;
+        audioSource.loop = true;
         audioSource.Play();
     }
 
-    // Update is called once per frame
     void Update()
     {
-      // animation
-       if (Input.GetKeyDown(KeyCode.D))
-
+        keyJump = Input.GetKeyDown(KeyCode.X);
+        if (keyJump)
         {
-          anim.SetInteger("State", 1);
-        } 
-
-        if (Input.GetKeyUp(KeyCode.D))
-
-        {
-          anim.SetInteger("State", 0);
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
         }
-        if (Input.GetKeyDown(KeyCode.A))
-
-        {
-          anim.SetInteger("State", 1);
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-
-        {
-          anim.SetInteger("State", 0);
-        } 
     }
 
+    // Update but for physics because consistency
     void FixedUpdate()
     {
-        float hozMovement = Input.GetAxis("Horizontal");
-        float vertMovement = Input.GetAxis("Vertical");
-        rd2d.AddForce(new Vector2(hozMovement * speed, vertMovement * speed));
+        keyHorizontal = Input.GetAxisRaw("Horizontal");
+        rb2d.velocity = new Vector2(keyHorizontal * moveSpeed, rb2d.velocity.y);
     }
-
 
     public void PlaySound(AudioClip sound)
     {
@@ -75,34 +58,21 @@ public class PlayerController : MonoBehaviour
         AudioSource.PlayClipAtPoint(sound, transform.position);
     }
 
-    public void TakeDamage(int damageAmount)
-    {
-        currentHealth -= damageAmount; // Reduce current health by the damage amount
-        
-        if (currentHealth <= 0)
-        {
-            Die(); // If health drops to or below 0, call the Die function
-        }
-      
-       
-    }
-
     public void PickupHealth(int healthAmount)
     {
-        
+
         currentHealth += healthAmount; // Increase current health by the health amount
-        // Ensure current health doesn't exceed max health
-        
+                                       // Ensure current health doesn't exceed max health
+
         currentHealth = Mathf.Min(currentHealth, maxHealth);
     }
 
     void Die()
     {
-        
+
         // Perform actions for player death, such as playing death animation, showing game over screen, etc.
         // For example:
         SceneManager.LoadScene("Menu");
 
     }
-
 }
