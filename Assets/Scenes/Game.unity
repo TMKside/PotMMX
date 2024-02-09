@@ -820,7 +820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83360b43fd1e1f4abbb03b143df256a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1370840844}
 --- !u!1 &540972766
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,8 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade29b906edaf3741a8718e9bcd031d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectable: {fileID: 8300000, guid: e4aa3119057feb04489221a16bc6ba2a, type: 3}
-  healthAmount: 2
 --- !u!1 &574432860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,7 +1562,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370840844}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 90aca04c138131a4d8fd59dd8d4d2e8d, type: 2}
   m_CullingMode: 0
@@ -1762,11 +1759,35 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1370840855}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2428e1ca-d62f-496e-98ae-0de7125f7a34
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1370840855}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 41193200-fedf-4d1e-b7df-ceda401c23a0
     m_ActionName: Player/OnMovement[/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -1799,7 +1820,7 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 8
-  speed: 1
+  speed: 0.12
   jumpHeight: 17
   wallJumpPushForce: 0
 --- !u!1 &1481398260
