@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
 using UnityEngine.InputSystem.Controls;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRigidbody; // Get player gameobject
     private PlayerInput input; // Get input system
@@ -20,10 +21,26 @@ public class PlayerMovement : MonoBehaviour
     public float wallJumpPushForce; // Horizontal force when walljumping
     private bool isFacingRight = true; // Checks direction player is facing
 
+    public int maxHealth = 10;
+    public int currentHealth;
+
+    Animator anim;
+
+    AudioSource audioSource;
+    public AudioClip backgroundMusicClip;
+    public AudioClip damageSoundClip;
+
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>(); // Auto get player gameobject
         input = GetComponent<PlayerInput>(); // Auto get input system
+        anim = GetComponent<Animator>();
+        currentHealth = maxHealth;
+
+        audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource component dynamically
+        audioSource.clip = backgroundMusicClip; // Assign background music clip
+        audioSource.loop = true; // Set background music to loop
+        audioSource.Play();
 
         // Unused code:
         //PlayerInputActions playerInputActions = new PlayerInputActions();
@@ -75,5 +92,30 @@ public class PlayerMovement : MonoBehaviour
         Vector2 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;
+    }
+
+    public void PlaySound(AudioClip sound)
+    {
+        // Play the provided sound
+        AudioSource.PlayClipAtPoint(sound, transform.position);
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount; // Reduce current health by the damage amount
+
+        if (currentHealth <= 0)
+        {
+            Die(); // If health drops to or below 0, call the Die function
+        }
+    }
+
+    void Die()
+    {
+
+        // Perform actions for player death, such as playing death animation, showing game over screen, etc.
+        // For example:
+        SceneManager.LoadScene("Menu");
+
     }
 }

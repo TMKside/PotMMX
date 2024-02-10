@@ -1,24 +1,20 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
     public AudioClip collectable;
-    public int healthAmount = 2;
-   
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        PlayerController controller = other.GetComponent<PlayerController>();
 
-        if (controller != null)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the pickup is collected by the player
+        if (other.CompareTag("Player"))
         {
-            controller.PickupHealth(healthAmount);
-            
-            Destroy(gameObject);
-            
-            controller.PlaySound(collectable);
+            // Get the player's controller component
+            PlayerController playerController = other.GetComponent<PlayerController>();
+
+
         }
     }
 }
-*/
