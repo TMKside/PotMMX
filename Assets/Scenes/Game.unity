@@ -11182,20 +11182,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 387072682845372128, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: chargeTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 387072682845372128, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: fullBulletPrefab
-      value: 
-      objectReference: {fileID: 2114747835298283607, guid: 5f4322ae9c6979e41a2ab94aaa4f632b, type: 3}
-    - target: {fileID: 387072682845372128, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: halfBulletPrefab
-      value: 
-      objectReference: {fileID: 2114747835298283607, guid: bc9c04e57f6daf347bb57f0f2542c876, type: 3}
     - target: {fileID: 387072682845372129, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 406483983}
     - target: {fileID: 387072682845372152, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}

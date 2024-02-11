@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 10;
     public int currentHealth;
 
+    [Header("Bullet Settings")]
     [SerializeField] int bulletDamage = 1;
     [SerializeField] float bulletSpeed = 5;
     [SerializeField] Transform bulletShootPos;
@@ -38,6 +39,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float chargeSpeed;
     [SerializeField] float chargeTime;
     bool isCharging;
+
+    [Header("Dash Settings")]
+    [SerializeField] float dashSpeed = 0.2f;
+    [SerializeField] float dashDuration = 1f;
+    bool isDashing;
 
     Animator anim;
 
@@ -135,23 +141,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*public void Charge(InputAction.CallbackContext context)
+    public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && chargeTime < 2)
+        if (context.performed && IsGrounded())
         {
-            isCharging = true;
-            if(isCharging == true)
-            {
-                chargeTime += Time.deltaTime * chargeSpeed;
-                Debug.Log("Is This Working?");
-            }            
+            StartCoroutine(Dash());
+            //Debug.Log("Yeah?");
         }
-        else if (chargeTime >= 2)
-        {
-            ShootHalfBullet();
-            Debug.Log("BANG!!");
-        }
-    }*/
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        playerRigidbody.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
+       // Debug.Log("YEAH!");
+    }
 
     private bool IsGrounded() // Checks if player is touching ground
     {

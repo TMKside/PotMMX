@@ -202,12 +202,15 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 0
   bulletDamage: 1
-  bulletSpeed: 16
+  bulletSpeed: 18
   bulletShootPos: {fileID: 3032248282549806200}
   bulletPrefab: {fileID: 2114747835298283607, guid: e9811d55f1103fa46a868a94b5b906e0, type: 3}
-  halfBulletPrefab: {fileID: 0}
+  halfBulletPrefab: {fileID: 2114747835298283607, guid: bc9c04e57f6daf347bb57f0f2542c876, type: 3}
+  fullBulletPrefab: {fileID: 2114747835298283607, guid: 5f4322ae9c6979e41a2ab94aaa4f632b, type: 3}
   chargeSpeed: 2
-  chargeTime: 3
+  chargeTime: 0
+  dashSpeed: 2.5
+  dashDuration: 1.5
   backgroundMusicClip: {fileID: 8300000, guid: b2007d1725a1a6340b6e077b814d3faf, type: 3}
   damageSoundClip: {fileID: 8300000, guid: a4d35033651d5994c8a9beca3fbfcdd8, type: 3}
 --- !u!114 &387072682845372129
@@ -285,22 +288,6 @@ MonoBehaviour:
     m_ActionName: Player/Shoot
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 387072682845372128}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Charge
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a6d97960-a9b4-40aa-9e00-28935931dad8
-    m_ActionName: Player/Charge
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: PauseGame
@@ -315,6 +302,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9c0647d7-88dd-4eb2-9dd8-29e5c18b81d1
     m_ActionName: Player/Pause Game[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 387072682845372128}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: da283275-7cb6-4296-a29b-6f4bf24ebaf1
+    m_ActionName: Player/Dash[/Keyboard/z]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

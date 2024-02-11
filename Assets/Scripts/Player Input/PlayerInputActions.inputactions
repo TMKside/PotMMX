@@ -33,13 +33,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Charge",
-                    "type": "Value",
-                    "id": "a6d97960-a9b4-40aa-9e00-28935931dad8",
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "da283275-7cb6-4296-a29b-6f4bf24ebaf1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1)",
-                    "initialStateCheck": true
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "PauseGame",
@@ -109,23 +109,23 @@
                 },
                 {
                     "name": "",
-                    "id": "8afe8c32-cbaf-4ebc-8295-01118e182e5f",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Charge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3560b577-b8d6-408b-b543-894aab4954f4",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "968d027d-f188-4b6a-b8a8-9bff829b4ab1",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
