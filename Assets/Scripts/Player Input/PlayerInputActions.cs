@@ -64,7 +64,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause Game"",
+                    ""name"": ""PauseGame"",
                     ""type"": ""Button"",
                     ""id"": ""9c0647d7-88dd-4eb2-9dd8-29e5c18b81d1"",
                     ""expectedControlType"": ""Button"",
@@ -121,7 +121,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0cba8c94-a19c-46e1-bf9a-8144fcb95cb3"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -132,7 +132,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8afe8c32-cbaf-4ebc-8295-01118e182e5f"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -147,7 +147,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pause Game"",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -162,7 +162,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_OnMovement = m_Player.FindAction("OnMovement", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
-        m_Player_PauseGame = m_Player.FindAction("Pause Game", throwIfNotFound: true);
+        m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()

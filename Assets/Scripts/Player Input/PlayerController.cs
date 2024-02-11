@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 10;
     public int currentHealth;
 
+    [SerializeField] int bulletDamage = 1;
+    [SerializeField] float bulletSpeed = 5;
+    [SerializeField] Transform bulletShootPos;
+    [SerializeField] GameObject bulletPrefab;
+
     Animator anim;
 
     AudioSource audioSource;
@@ -81,6 +86,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ShootBullet();
+            //Debug.Log("SHOOT!");
+        }
+    }
+
     private bool IsGrounded() // Checks if player is touching ground
     {
         return Physics2D.OverlapCircle(floorCheck.position, 0.2f, floorLayer); // Returns true if floorcheck child object overlaps floor
@@ -92,6 +106,16 @@ public class PlayerController : MonoBehaviour
         Vector2 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;
+    }
+
+    void ShootBullet()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, bulletShootPos.position, Quaternion.identity);
+        bullet.name = bulletPrefab.name;
+        bullet.GetComponent<BulletScript>().SetDamageValue(bulletDamage);
+        bullet.GetComponent<BulletScript>().SetBulletSpeed(bulletSpeed);
+        bullet.GetComponent<BulletScript>().SetBulletDirection((isFacingRight) ? Vector2.right : Vector2.left);
+        bullet.GetComponent<BulletScript>().Shoot();
     }
 
     public void PlaySound(AudioClip sound)
