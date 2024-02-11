@@ -78,7 +78,6 @@ GameObject:
   - component: {fileID: 387072682845372135}
   - component: {fileID: 387072682845372133}
   - component: {fileID: 387072682845372130}
-  - component: {fileID: 387072682845372134}
   - component: {fileID: 387072682845372132}
   m_Layer: 6
   m_Name: PottMan
@@ -390,22 +389,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24160793, y: 0.30814582}
   m_EdgeRadius: 0
---- !u!70 &387072682845372134
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387072682845372155}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: eb145f5c5671dde468592051a6f1048e, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.003924809, y: 0.02}
-  m_Size: {x: 0.23, y: 0.3378496}
-  m_Direction: 0
 --- !u!82 &387072682845372132
 AudioSource:
   m_ObjectHideFlags: 0

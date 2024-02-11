@@ -18,15 +18,9 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Incincible(bool invincibility)
+    public void Invincible(bool invincibility)
     {
         isInvincible = invincibility;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void TakeDamage(int damage)
