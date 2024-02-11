@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class Bullet3 : MonoBehaviour
 {
     Rigidbody2D rb2d;
     SpriteRenderer sprite;
@@ -59,10 +59,15 @@ public class BulletScript : MonoBehaviour
         destroyTime = destroyDelay;
     }
 
-   private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(this.damage);
+            }
             Destroy(gameObject, 0.02f);
         }
     }

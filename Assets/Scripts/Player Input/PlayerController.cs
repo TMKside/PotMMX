@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     public float wallJumpPushForce; // Horizontal force when walljumping
     private bool isFacingRight = true; // Checks direction player is facing
 
+    bool hitSideRight;
+    bool isInvincible;
+    bool isTakingDamage;
+
+
     public int maxHealth = 10;
     public int currentHealth;
 
@@ -28,6 +33,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bulletSpeed = 5;
     [SerializeField] Transform bulletShootPos;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject halfBulletPrefab;
+    [SerializeField] GameObject fullBulletPrefab;
+    [SerializeField] float chargeSpeed;
+    [SerializeField] float chargeTime;
+    bool isCharging;
 
     Animator anim;
 
@@ -54,8 +64,38 @@ public class PlayerController : MonoBehaviour
         //playerInputActions.Player.WalkRun.performed += WalkRun;
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.C) && chargeTime < 5)
+        {
+            isCharging = true;
+            if (isCharging == true)
+            {
+                chargeTime += Time.deltaTime * chargeSpeed;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            return;
+        }
+
+        else if (Input.GetKeyUp(KeyCode.C))
+        {
+            if (chargeTime >= 2 && chargeTime < 3)
+                ShootHalfBullet();
+            else if (chargeTime >= 3)
+                ShootFullBullet();
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (isTakingDamage)
+        {
+            anim.Play("Hit");
+            return;
+        }
+
         playerRigidbody.transform.position = new Vector2(playerRigidbody.transform.position.x + (moveDir * speed), playerRigidbody.transform.position.y); // Moves player left or right when input is performed (will probably be replaced by an AddForce function)
         if (moveDir == 0) // Unused
         {
@@ -95,6 +135,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*public void Charge(InputAction.CallbackContext context)
+    {
+        if (context.performed && chargeTime < 2)
+        {
+            isCharging = true;
+            if(isCharging == true)
+            {
+                chargeTime += Time.deltaTime * chargeSpeed;
+                Debug.Log("Is This Working?");
+            }            
+        }
+        else if (chargeTime >= 2)
+        {
+            ShootHalfBullet();
+            Debug.Log("BANG!!");
+        }
+    }*/
+
     private bool IsGrounded() // Checks if player is touching ground
     {
         return Physics2D.OverlapCircle(floorCheck.position, 0.2f, floorLayer); // Returns true if floorcheck child object overlaps floor
@@ -112,10 +170,34 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, bulletShootPos.position, Quaternion.identity);
         bullet.name = bulletPrefab.name;
-        bullet.GetComponent<BulletScript>().SetDamageValue(bulletDamage);
-        bullet.GetComponent<BulletScript>().SetBulletSpeed(bulletSpeed);
-        bullet.GetComponent<BulletScript>().SetBulletDirection((isFacingRight) ? Vector2.right : Vector2.left);
-        bullet.GetComponent<BulletScript>().Shoot();
+        bullet.GetComponent<Bullet1>().SetDamageValue(bulletDamage);
+        bullet.GetComponent<Bullet1>().SetBulletSpeed(bulletSpeed);
+        bullet.GetComponent<Bullet1>().SetBulletDirection((isFacingRight) ? Vector2.right : Vector2.left);
+        bullet.GetComponent<Bullet1>().Shoot();
+    }
+
+    void ShootHalfBullet()
+    {
+        GameObject halfBullet = Instantiate(halfBulletPrefab, bulletShootPos.position, Quaternion.identity);
+        halfBullet.name = halfBulletPrefab.name;
+        halfBullet.GetComponent<Bullet2>().SetDamageValue(bulletDamage);
+        halfBullet.GetComponent<Bullet2>().SetBulletSpeed(bulletSpeed);
+        halfBullet.GetComponent<Bullet2>().SetBulletDirection((isFacingRight) ? Vector2.right : Vector2.left);
+        halfBullet.GetComponent<Bullet2>().Shoot();
+        isCharging = false;
+        chargeTime = 0;
+    }
+
+    void ShootFullBullet()
+    {
+        GameObject fullBullet = Instantiate(fullBulletPrefab, bulletShootPos.position, Quaternion.identity);
+        fullBullet.name = fullBulletPrefab.name;
+        fullBullet.GetComponent<Bullet3>().SetDamageValue(bulletDamage);
+        fullBullet.GetComponent<Bullet3>().SetBulletSpeed(bulletSpeed);
+        fullBullet.GetComponent<Bullet3>().SetBulletDirection((isFacingRight) ? Vector2.right : Vector2.left);
+        fullBullet.GetComponent<Bullet3>().Shoot();
+        isCharging = false;
+        chargeTime = 0;
     }
 
     public void PlaySound(AudioClip sound)
@@ -126,12 +208,55 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount; // Reduce current health by the damage amount
-
-        if (currentHealth <= 0)
+        if (!isInvincible && currentHealth >= 1)
         {
-            Die(); // If health drops to or below 0, call the Die function
+            currentHealth -= damageAmount; // Reduce current health by the damage amount
+
+            if (currentHealth <= 0)
+            {
+                Die(); // If health drops to or below 0, call the Die function
+            }
+            else
+            {
+                StartDamageAnimation();
+            }
         }
+    }
+
+    void StartDamageAnimation()
+    {
+        if (!isInvincible)
+        {
+            if (!isTakingDamage)
+            {
+                isTakingDamage = true;
+                isInvincible = true;
+                float hitForceX = 3f;
+                float hitForceY = 10f;
+                if (hitSideRight) hitForceX = -hitForceX;
+                playerRigidbody.velocity = Vector2.zero;
+                playerRigidbody.AddForce(new Vector2(hitForceX, hitForceY), ForceMode2D.Impulse);
+            }
+        else
+            return;
+        }
+    }
+
+    void StopDamageAnimation()
+    {
+        isTakingDamage = false;
+        isInvincible = false;
+        anim.Play("Idle", -1, 0f);
+    }
+
+    public void HitSide(bool rightSide)
+    {
+        hitSideRight = rightSide;
+    }
+
+    public void Invincible(bool invincibility)
+    {
+        isInvincible = invincibility;
     }
 
     void Die()

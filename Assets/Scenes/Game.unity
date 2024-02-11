@@ -791,7 +791,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -74}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &350745595
 MonoBehaviour:
@@ -961,7 +961,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: INVINCIBILITY
+  m_text: INFINITE HEALTH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10961,6 +10961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2178925868512745488, guid: b2c5bbfa771c69e4b8cfe43f2951a58d, type: 3}
+      propertyPath: bulletSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7096992075849247728, guid: b2c5bbfa771c69e4b8cfe43f2951a58d, type: 3}
       propertyPath: m_Name
       value: MetClone (6)
@@ -10975,7 +10979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7096992075849247730, guid: b2c5bbfa771c69e4b8cfe43f2951a58d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.585
+      value: 0.727
       objectReference: {fileID: 0}
     - target: {fileID: 7096992075849247730, guid: b2c5bbfa771c69e4b8cfe43f2951a58d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11178,14 +11182,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 387072681436301998, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: m_Layer
-      value: 6
+    - target: {fileID: 387072682845372128, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
+      propertyPath: chargeTime
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 387072682536267500, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
+    - target: {fileID: 387072682845372128, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
+      propertyPath: fullBulletPrefab
+      value: 
+      objectReference: {fileID: 2114747835298283607, guid: 5f4322ae9c6979e41a2ab94aaa4f632b, type: 3}
+    - target: {fileID: 387072682845372128, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
+      propertyPath: halfBulletPrefab
+      value: 
+      objectReference: {fileID: 2114747835298283607, guid: bc9c04e57f6daf347bb57f0f2542c876, type: 3}
     - target: {fileID: 387072682845372129, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11238,10 +11246,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PottMan
       objectReference: {fileID: 0}
-    - target: {fileID: 387072682845372155, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3717458745647661357, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
       propertyPath: hearts.Array.data[0]
       value: 
@@ -11262,14 +11266,6 @@ PrefabInstance:
       propertyPath: hearts.Array.data[4]
       value: 
       objectReference: {fileID: 2063144421}
-    - target: {fileID: 6307343302076304149, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7596380160956800572, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e37e3613341bfc4ebc344bfd3bf29de, type: 3}
 --- !u!1001 &7096992076356423084
@@ -11293,7 +11289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7096992075849247730, guid: b2c5bbfa771c69e4b8cfe43f2951a58d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.42
+      value: -2.26
       objectReference: {fileID: 0}
     - target: {fileID: 7096992075849247730, guid: b2c5bbfa771c69e4b8cfe43f2951a58d, type: 3}
       propertyPath: m_LocalPosition.z

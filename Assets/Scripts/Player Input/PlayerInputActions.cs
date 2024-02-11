@@ -56,12 +56,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Charge"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""a6d97960-a9b4-40aa-9e00-28935931dad8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""PauseGame"",
