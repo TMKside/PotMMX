@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class DeathPit : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameOver();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameOver();
+        }
     }
 
     private void GameOver()

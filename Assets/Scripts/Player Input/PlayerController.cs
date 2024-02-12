@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public Transform wallCheck; // Get wallcheck child object (requires editor)
     public LayerMask floorLayer; // Get floor layer (requires editor)
 
-    private float moveDir; // Direction of movement
+    public float moveDir; // Direction of movement
     public float speed = 0.075f; // Player default speed; can be adjusted in editor
     public float jumpHeight = 12f; // Player default jump height; can be adjusted in editor
     public float wallJumpPushForce; // Horizontal force when walljumping
@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     public AudioClip backgroundMusicClip;
     public AudioClip damageSoundClip;
+    public AudioClip shoot1Clip;
+    public AudioClip shoot2Clip;
 
     private void Awake()
     {
@@ -122,6 +124,14 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext context) // Input System move function
     {
         moveDir = context.ReadValue<float>(); // Movement direction equals value of 1D Axis
+        if (moveDir == 0f)
+        {
+            anim.Play("Idle");
+        }
+        if (moveDir != 0f)
+        {
+            anim.Play("Run");
+        }
     }
 
     public void Jump(InputAction.CallbackContext context) // Input system jump function
@@ -129,6 +139,18 @@ public class PlayerController : MonoBehaviour
         if (context.performed && IsGrounded()) // If jump is performed and ground check is successful,
         {
             playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse); // Add upward momentum based on jumpHeight variable
+            anim.Play("Jump");
+        }
+        if (IsGrounded())
+        {
+            if (moveDir != 0)
+            {
+                anim.Play("Run");
+            }
+            else
+            {
+                anim.Play("Idle");
+            }
         }
     }
 
@@ -154,14 +176,17 @@ public class PlayerController : MonoBehaviour
     {
         isDashing = true;
         playerRigidbody.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        anim.Play("Dash");
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+        anim.Play("Idle");
        // Debug.Log("YEAH!");
     }
 
     private bool IsGrounded() // Checks if player is touching ground
     {
         return Physics2D.OverlapCircle(floorCheck.position, 0.2f, floorLayer); // Returns true if floorcheck child object overlaps floor
+        anim.Play("Idle");
     }
 
     private void Flip() // Function flips player object horizontally
